@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+  index.html — é a ENTRADA do projeto no Vite.
+  Diferente do Webpack, no Vite o index.html fica na RAIZ (não dentro de public/)
+  e é ele que "aponta" para o JavaScript através de <script type="module">.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Arquivos da pasta public/ são copiados SEM alteração para o dist/.
+         Por isso o caminho começa com "/" e o nome NÃO ganha hash. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- %VITE_APP_TITULO% é trocado pelo valor do arquivo .env na hora do build -->
+    <title>%VITE_APP_TITULO%</title>
+  </head>
+
+  <body>
+    <main class="cartao">
+      <header class="topo">
+        <!-- O src é preenchido pelo main.js, que importa o SVG (assim ele ganha hash no build) -->
+        <img id="logo" alt="Logotipo" width="40" height="40" />
+        <h1 id="titulo">Mini Tarefas</h1>
+      </header>
+
+      <form id="form" autocomplete="off">
+        <input id="novo" type="text" placeholder="O que precisa ser feito?" required />
+        <button type="submit">Adicionar</button>
+      </form>
+
+      <p id="contador" aria-live="polite"></p>
+      <ul id="lista"></ul>
+
+      <button id="btn-sobre" type="button" class="secundario">Sobre este build</button>
+      <!-- Preenchida só quando o botão é clicado (carregamento sob demanda) -->
+      <section id="sobre" hidden></section>
+    </main>
+
+    <noscript>Este site precisa de JavaScript para funcionar.</noscript>
+
+    <!-- type="module" = JavaScript moderno com import/export.
+         O Vite lê este arquivo, segue todos os "import" e monta o bundle. -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

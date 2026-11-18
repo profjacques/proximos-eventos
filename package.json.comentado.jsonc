@@ -1,0 +1,62 @@
+// =====================================================================
+// package.json COMENTADO — arquivo apenas para ESTUDO.
+// O package.json de verdade NÃO aceita comentários (JSON puro).
+// Este arquivo (.jsonc = "JSON com comentários") explica cada campo.
+// =====================================================================
+{
+  // Nome do pacote (minúsculas, sem espaços). Aparece no npm e no lockfile.
+  "name": "mini-tarefas",
+
+  // Versão do SEU projeto, no formato semver: MAIOR.MENOR.CORREÇÃO
+  //   MAIOR   -> mudanças que quebram compatibilidade
+  //   MENOR   -> funcionalidade nova, compatível
+  //   CORREÇÃO-> bug corrigido, compatível
+  "version": "1.0.0",
+
+  // "private": true impede publicar este projeto por engano no registro público do npm.
+  // É o correto para aplicações (sites); bibliotecas é que são publicadas.
+  "private": true,
+
+  "description": "Projeto demonstrativo: pacotes (npm), build (Vite) e deploy estático (Render)",
+
+  // "type": "module" diz ao Node que os arquivos .js usam ES Modules (import/export).
+  // Sem isso, o Node trataria .js como CommonJS (require/module.exports).
+  "type": "module",
+
+  // Versão do Node exigida. O Vite 7 precisa de Node 20.19+ ou 22.12+.
+  // (npm apenas AVISA se não bater; Yarn pode bloquear a instalação.)
+  "engines": {
+    "node": ">=20.19.0"
+  },
+
+  // Scripts = atalhos para comandos. Rodam com:  npm run <nome>  (ou yarn <nome>)
+  "scripts": {
+    "dev": "vite",            // servidor de desenvolvimento com recarga instantânea (HMR)
+    "build": "vite build",    // gera a pasta dist/ otimizada para produção
+    "preview": "vite preview" // serve o dist/ localmente, para testar ANTES de publicar
+  },
+
+  // dependencies = pacotes que o SITE FINAL precisa (vão para dentro do bundle).
+  // Instalado com:  npm install dayjs   |   yarn add dayjs
+  "dependencies": {
+    // ^1.11.13 = "aceito 1.11.13 ou qualquer 1.x.y MAIOR; nunca 2.0.0".
+    //   ^  (circunflexo) -> atualiza MENOR e CORREÇÃO
+    //   ~  (til)         -> atualiza só CORREÇÃO  (~1.11.13 aceita 1.11.x)
+    //   sem símbolo      -> versão exata
+    "dayjs": "^1.11.13"
+  },
+
+  // devDependencies = ferramentas usadas SÓ para desenvolver/construir.
+  // Não vão para o navegador do usuário (o Vite roda no seu computador / no Render).
+  // Instalado com:  npm install -D vite   |   yarn add -D vite
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
+
+// ---------------------------------------------------------------------
+// Arquivos que o gerenciador cria sozinho (NÃO edite à mão):
+//   node_modules/       -> os pacotes baixados (NUNCA vai para o Git)
+//   package-lock.json   -> versões EXATAS instaladas (SEMPRE vai para o Git)
+//                          (no Yarn o equivalente é o yarn.lock)
+// ---------------------------------------------------------------------

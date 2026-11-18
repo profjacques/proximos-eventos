@@ -1,0 +1,79 @@
+/* =====================================================================
+   src/estilos.css
+   Este CSS é IMPORTADO pelo main.js (import './estilos.css').
+   No build, o Vite junta, minifica e gera dist/assets/index-<hash>.css
+   ===================================================================== */
+
+/* Variáveis CSS (custom properties): trocar o tema fica fácil */
+:root {
+  --cor-fundo: #f1f0fa;
+  --cor-cartao: #ffffff;
+  --cor-texto: #1b1b2f;
+  --cor-destaque: #646cff;
+  --cor-suave: #6b7090;
+  --raio: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: start center;
+  padding: 2rem 1rem;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.cartao {
+  width: min(100%, 460px);
+  background: var(--cor-cartao);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgb(27 27 47 / 12%);
+}
+
+.topo { display: flex; align-items: center; gap: .75rem; }
+.topo h1 { margin: 0; font-size: 1.5rem; }
+
+form { display: flex; gap: .5rem; margin: 1.25rem 0 .5rem; }
+input[type='text'] {
+  flex: 1;
+  padding: .6rem .8rem;
+  border: 1px solid #c9c7e6;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  padding: .6rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--cor-destaque);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button.secundario { background: transparent; color: var(--cor-destaque); padding-left: 0; }
+button.remover { background: transparent; color: var(--cor-suave); padding: .2rem .5rem; }
+
+#contador { color: var(--cor-suave); margin: .25rem 0 .75rem; }
+
+ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem 0;
+  border-bottom: 1px solid #eceaf8;
+}
+li span { flex: 1; }
+li small { color: var(--cor-suave); }
+li.feita span { text-decoration: line-through; color: var(--cor-suave); }
+
+#sobre { background: var(--cor-fundo); border-radius: 8px; padding: .75rem 1rem; }
+#sobre dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .25rem 1rem; }
+#sobre dt { color: var(--cor-suave); }
+#sobre dd { margin: 0; font-weight: 600; word-break: break-all; }

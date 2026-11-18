@@ -1,0 +1,40 @@
+# =====================================================================
+# render.yaml — "Blueprint" do Render (infraestrutura como código)
+# =====================================================================
+# Opcional: você também pode criar o site clicando no painel do Render
+# (New > Static Site) e preencher os MESMOS campos à mão.
+# Com este arquivo na raiz do repositório, o deploy fica versionado no Git.
+
+services:
+  # Site estático no Blueprint = "type: web" + "runtime: static"
+  - type: web
+    runtime: static
+    name: mini-tarefas
+
+    # Comando executado NO RENDER a cada deploy.
+    #   npm ci          -> instala EXATAMENTE as versões do package-lock.json
+    #                      (por isso o package-lock.json precisa estar no Git!)
+    #   npm run build   -> roda o Vite e gera a pasta dist/
+    buildCommand: npm ci && npm run build
+
+    # Pasta com o resultado do build: é ISSO que o Render publica na CDN.
+    staticPublishPath: dist
+
+    # Variáveis lidas SÓ durante o build (site estático não tem "runtime").
+    envVars:
+      - key: NODE_VERSION   # o Vite 7 exige Node 20.19+ ou 22.12+
+        value: 22
+
+    # Cabeçalhos HTTP. Arquivos em /assets/ têm hash no nome (index-3f9a.js),
+    # então podem ficar em cache por 1 ano: se mudarem, o nome muda.
+    headers:
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+
+    # Só descomente se o projeto virar um SPA com rotas (React Router, Vue Router...):
+    # reescreve qualquer URL para o index.html, evitando erro 404 ao recarregar /rota.
+    # routes:
+    #   - type: rewrite
+    #     source: /*
+    #     destination: /index.html
